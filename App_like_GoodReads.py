@@ -8,7 +8,7 @@ def AddBook():
     book_name =input("Insert a book name: ")
     author_name =input("Insert the author of the book : ")
     import csv
-    with open("booksDB.csv", "w") as file:
+    with open("booksDB.csv", mode="w") as file:
         writer = csv.DictWriter(file,fieldnames=[
             "BookName", "AuthorName","SharedWith", "IsRead"
         ])
