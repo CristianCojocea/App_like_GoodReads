@@ -17,7 +17,19 @@ def AddBook():
     print("Book was added successfully")
 
 def ListBook():
-    print("List a book option")
+    import csv
+    with open ("booksDB.csv", mode="r") as file:
+        #tale all data from DB
+        rows = csv.DictReader(file,fieldnames=("BookName", "AuthorName", "SharedWith", "IsRead"))
+        #go line by line
+        for row in rows:
+            print(row["BookName"])
+            print(row["AuthorName"])
+            print(row["SharedWith"])
+            print(row["IsRead"])
+            print(
+               f"Book name is {row.get('BookName')}, Author Name {row.get('AuthorName')} shared with {row.get('SharedWith')} and is read {row.get('IsRead')}"
+            )
 
 def UpdateBook():
     print("Update a book option")
