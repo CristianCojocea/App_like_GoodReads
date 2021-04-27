@@ -3,19 +3,39 @@
 #When the user starts the app next time, the stored books should be preserved (via csv)
 
 def AddBook():
-    print("Add a book option")
+# The app inquires the user to provide the author and title of the book
+# this book is saved in DB
+    book_name =input("Insert a book name: ")
+    author_name =input("Insert the author of the book : ")
+    import csv
+    with open("booksDB.csv", mode="w") as file:
+        writer = csv.DictWriter(file,fieldnames=[
+            "BookName", "AuthorName","SharedWith", "IsRead"
+        ])
+        writer.writerow({"BookName": book_name,
+                     "AuthorName": author_name})
+    print("Book was added successfully")
 
 def ListBook():
-    print("List a book option")
+    import csv
+    with open ("booksDB.csv", mode="r") as file:
+        #tale all data from DB
+        rows = csv.DictReader(file,fieldnames=("BookName", "AuthorName", "SharedWith", "IsRead"))
+        #go line by line
+        for row in rows:
+            print(row["BookName"])
+            print(row["AuthorName"])
+            print(row["SharedWith"])
+            print(row["IsRead"])
+            print(
+               f"Book name is {row.get('BookName')}, Author Name {row.get('AuthorName')} shared with {row.get('SharedWith')} and is read {row.get('IsRead')}"
+            )
 
 def UpdateBook():
     print("Update a book option")
 
 def ShareBook():
     print("Share a book option")
-
-
-
 
 #Step 1: Main menu
 print("""
@@ -30,7 +50,7 @@ print("""
 """)
 option = int(input("Please choose an option -> "))
 
-if option == 1:
+if option==1:
     AddBook()
 elif option==2:
     ListBook()
