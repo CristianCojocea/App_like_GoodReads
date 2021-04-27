@@ -52,6 +52,7 @@ def UpdateBook():
 
                 print("Book was updated successfully")
                 break
+
         print("Book was updated successfully")
 
 
